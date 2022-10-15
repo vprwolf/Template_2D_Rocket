@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class button_forward : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,8 @@ public class button_forward : MonoBehaviour
 
     public void moveForeward()
     {
-        gameManager.I.moveForward();
+        gameManager.I.StartMoving();
+        //gameManager.I.moveForward();
     }
 
     public void showTrail()

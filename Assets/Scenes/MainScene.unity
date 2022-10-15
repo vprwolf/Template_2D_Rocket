@@ -360,12 +360,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 519420028}
   train: {fileID: 2015795760}
-  dummy: {fileID: 614648959}
+  dummy: {fileID: 614648961}
   appearingTrail: {fileID: 1136045342}
   ButtonForward: {fileID: 1139198804}
   pos: 0
   target01: {fileID: 2015795758}
   target02: {fileID: 1136045345}
+  moveDuration: 0.2
+  targetPosition: {fileID: 614648961}
 --- !u!4 &321800081
 Transform:
   m_ObjectHideFlags: 0
