@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
-    
+
 {
     public GameObject camera;
     public Rigidbody2D train;
@@ -20,9 +20,15 @@ public class gameManager : MonoBehaviour
 
     private float moveTimer;
     private bool isMoving;
-    public float moveDuration = 0.2f;
+    public float moveDuration = 0.05f;
     private Vector3 startPosition;
     public Transform targetPosition;
+
+    private bool turnL;
+    private bool turnR;
+
+
+    private Vector3 moveTarget;
 
     void Awake()
     {
@@ -33,9 +39,9 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        
-        
+
+
+
     }
 
     // Update is called once per frame
@@ -45,49 +51,50 @@ public class gameManager : MonoBehaviour
 
         if (isMoving)
         {
-            Vector3 target = targetPosition.position;
-            Vector3 start = train.position;
 
             moveTimer += Time.deltaTime;
 
             float alpha = moveTimer / moveDuration;
 
-            transform.position = Vector3.Lerp(start, target, alpha);
+            train.transform.position = Vector3.Lerp(startPosition, moveTarget, alpha);
 
-        } 
+        }
 
 
     }
 
 
 
-    /*public void moveForward()
+    public void moveForward()
     {
         dummy.transform.Translate(0f, 1.2f, 0f);
-        isMoving = true;
+        
         //Invoke("OnInvoke", 0.5f);
         //Invoke("OnInvoke",0.0f);
+    }
+
+    public void turnLeft()
+    {
+        turnL = true;
+    }
+
+    public void turnRight()
+    {
+        turnR = true;
     }
 
 
     void OnInvoke()
     {
-        //Vector3 spotPos = train.transform.position;
-        //Vector3 endPos = new Vector3(0,1.2f,0);
-
-        //train.transform.position += new Vector3(0f, 1.2f, 0f);
-
-        //train.transform.Translate(0f, 1.2f, 0f);
-        //train.transform.position = Vector3.Lerp(train.transform.position, dummy.transform.position, 0.05f);
-        //train.transform.position = Vector3.MoveTowards(train.transform.position, dummy.transform.position, 1.2f);
-        //train.transform.position = Vector3.MoveTowards(transform.position, dummy.transform.position, 0.1f);
-    }*/
+        isMoving = true;
+    }
 
     public void showTrail()
     {
-        pos +=1.2f;
+        pos += 1.2f;
         appearingTrail.SetActive(true);
-        Instantiate(appearingTrail, new Vector3(0,pos), Quaternion.identity);
+        Instantiate(appearingTrail, new Vector3(0, pos), Quaternion.identity);
+        dummy.Translate(0f, 1.2f, 0f);
     }
 
     public void StartMoving()
@@ -95,10 +102,12 @@ public class gameManager : MonoBehaviour
 
         moveTimer = 0;
 
+        startPosition = train.transform.position;
+        moveTarget = dummy.transform.position;
+
         isMoving = true;
 
-        startPosition = transform.position;
-
+       
     }
 
 }
