@@ -12,6 +12,8 @@ public class gameManager : MonoBehaviour
     public Transform dummy;
     public GameObject appearingTrail;
     public GameObject ButtonForward;
+    public GameObject ButtonLeft;
+    public GameObject ButtonRight;
     public static gameManager I;
 
     public float pos = 0.0f;
@@ -30,6 +32,7 @@ public class gameManager : MonoBehaviour
 
     private Vector3 moveTarget;
 
+
     void Awake()
     {
         I = this;
@@ -39,8 +42,6 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
 
     }
 
@@ -60,34 +61,61 @@ public class gameManager : MonoBehaviour
 
         }
 
+        /*if (turnL)
+        {
+            moveTimer += Time.deltaTime;
+
+            float alpha = moveTimer / moveDuration;
+
+            Quaternion targetRotation = Quaternion.Lerp(aRotation, bRotation, alpha);
+            train.transform.rotation = targetRotation;s
+        }*/
+
+        if (turnR)
+        {
+            moveTimer += Time.deltaTime;
+
+            float alpha = moveTimer / moveDuration;
+
+            Quaternion aRotation = Quaternion.Euler(new Vector3(30, 0, 0));
+            Quaternion bRotation = Quaternion.Euler(new Vector3(60, 0, 0));
+
+            Quaternion targetRotation = Quaternion.Lerp(aRotation, bRotation, alpha);
+            train.transform.rotation = targetRotation;
+        }
 
     }
 
-
-
-    public void moveForward()
+    /*public void moveForward()
     {
         dummy.transform.Translate(0f, 1.2f, 0f);
         
         //Invoke("OnInvoke", 0.5f);
-        //Invoke("OnInvoke",0.0f);
-    }
+    }*/
 
-    public void turnLeft()
+   public void turnLeft()
     {
+        moveTimer = 0;
+
+        Quaternion aRotation = Quaternion.Euler(new Vector3(30, 0, 0));
+        Quaternion bRotation = Quaternion.Euler(new Vector3(60, 0, 0));
+
         turnL = true;
     }
 
     public void turnRight()
     {
+        moveTimer = 0;
+
+
         turnR = true;
     }
 
 
-    void OnInvoke()
+    /*void OnInvoke()
     {
         isMoving = true;
-    }
+    }*/
 
     public void showTrail()
     {
@@ -106,7 +134,6 @@ public class gameManager : MonoBehaviour
         moveTarget = dummy.transform.position;
 
         isMoving = true;
-
        
     }
 

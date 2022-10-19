@@ -15,4 +15,9 @@ public class button_right : MonoBehaviour
     {
         
     }
+
+    public void turnRight()
+    {
+        gameManager.I.turnRight();
+    }
 }
